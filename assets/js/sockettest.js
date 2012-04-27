@@ -1,26 +1,33 @@
 var l4rp = function(io) {
 	
-	var socket = io.connect('http://localhost');
-	socket.on('test', receiveMessage);
+	var socket = io.connect('http://10.0.7.250');
+	socket.on('msg', receiveMessage);
 	
 	function receiveMessage(data) {
-		console.log('got message!');
-		console.log(data);
+		console.log(data.message);
 	}
 	
 	socket.on('connect', function () {
 	  console.log('connected');
 	});
+	
 	socket.on('disconnect', function () {
 	  console.log('disconnected');
 	});
+	
 	socket.on('reconnecting', function () {
 	  console.log('reconnecting');
 	});
 	
 	return {
-		send:function() {
-			socket.emit('test', {'test' : 'Hello from client!'});
+		setName : function(name) {
+			socket.emit('setName', {'name' : name});
+		},
+		send : function (message) {
+			socket.emit('clientSendMessage', {'message' : message});
+		},
+		join : function (room) {
+			socket.emit('join', {'room' : room});
 		}
 	}
 }(io);
