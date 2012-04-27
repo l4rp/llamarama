@@ -3,10 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , app = module.exports = express.createServer()
-  , require('./sockets').sockets.listen(app);
+var express = require('express'),
+    routes = require('./routes'),
+    app = module.exports = express.createServer(),
+    io = require('socket.io').listen(app),
+    sockets = require('./lib/sockets');
 
 // Configuration
 
@@ -34,3 +35,7 @@ app.get('/', routes.index);
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
+
+// Initialise the listeners for web socket connections
+
+sockets.initListeners(io);
