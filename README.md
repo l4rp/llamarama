@@ -2,7 +2,7 @@ Llamarama
 =========
 
 Are you a follower or a leader? Do you have what it takes to guide the
-flock to llama-nirvana?
+flock to llama-glama-nirvana?
 
 Game Play
 ---------
